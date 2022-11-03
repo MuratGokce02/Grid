@@ -1,6 +1,6 @@
 extends TileMap
 
-var map_size = Vector2(20, 20)
+export var map_size = Vector2(20, 20)
 var half_cell_size = get_cell_size() / 2
 
 var map = []
@@ -36,8 +36,8 @@ func _unhandled_input(event):
 		var touch_position = event.get_position()
 		#print(touch_position)
 		var target_coordinates = world_to_map(touch_position)
-		print(target_coordinates)
-		if target_coordinates.x >= 20 or target_coordinates.y >= 20:
+		#print(target_coordinates)
+		if target_coordinates.x >= map_size.x or target_coordinates.y >= map_size.y:
 			return
 		if is_target_cell_empty(target_coordinates):
 			append_target(target_coordinates)
