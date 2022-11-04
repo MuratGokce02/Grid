@@ -69,8 +69,8 @@ func find_walkable_cells():
 	walkable_cells.append(player_coordinates)
 	for i in range(length, 0, 0):
 		walkable_cells.append(current + directions.up)
-		current += directions.right
-		walkable_cells.append(current)
+#		current += directions.right
+#		walkable_cells.append(current)
 
 
 
