@@ -4,15 +4,16 @@ enum{PLAYER}
 
 export var map_size = Vector2(20, 20)
 var half_cell_size = get_cell_size() / 2
+var directions = {"up": Vector2(0, -1), "rigth": Vector2(1, 0), "down": Vector2(0, 1), "left": Vector2(-1, 0)}
 
 var map = []
 var full_cells = []
 var walkable_cells = []
 
-var player_coordinates = Vector2(10, 10)
+var player_coordinates = Vector2(5, 5)
 var player_selected = false
 var battle_mode = false
-var player_speed = 4
+var player_speed = 5
 
 
 func _ready():
@@ -62,21 +63,39 @@ func append_target(target_coordinates):
 		full_cells.append([target_coordinates.x, target_coordinates.y])
 
 
-func find_walkable_cells():
-	var directions = {"up": Vector2(0, -1), "rigth": Vector2(1, 0), "down": Vector2(0, -1), "left": Vector2(-1, 0)}	
-	var length = player_speed
+func find_walkable_cells(var speed):
 	var current = player_coordinates
-	walkable_cells.append(player_coordinates)
-	for i in range(length, 0, 0):
-		walkable_cells.append(current + directions.up)
-#		current += directions.right
-#		walkable_cells.append(current)
+	for i in range(player_speed, -1, -1):
+		find_walkable_cells_helper(current + i * directions.left, speed - i + 1)
+		find_walkable_cells_helper(current + i * directions.rigth, speed - i + 1)
 
-
+func find_walkable_cells_helper(var current, var length):
+	walkable_cells.append(current)
+	for i in range(length):
+			walkable_cells.append(current + directions.up * i)
+			walkable_cells.append(current + directions.down * i)
 
 func is_player_selected():
 	if player_selected == true:
-		find_walkable_cells()
+		find_walkable_cells(player_speed)
 		print(walkable_cells)
+		lol()
+		walkable_cells.clear()
+	player_selected = false
+
+func lol():
+	var harita = []
+	for x in range(20):
+		harita.append([])
+		for y in range(20):
+			harita[x].append(0)
+			
+	for cell in walkable_cells:
+		if cell.x > 0 and cell.y > 0:
+			harita[cell.y][cell.x] = "1"
+		
+	for y in harita:
+		print(y)
+		
 
 
