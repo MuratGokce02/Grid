@@ -13,7 +13,7 @@ var walkable_cells = []
 var player_coordinates = Vector2(5, 5)
 var player_selected = false
 var battle_mode = false
-var player_speed = 5
+var player_speed = 4
 
 
 func _ready():
@@ -67,13 +67,13 @@ func find_walkable_cells(var speed):
 	var current = player_coordinates
 	for i in range(player_speed, -1, -1):
 		find_walkable_cells_helper(current + i * directions.left, speed - i + 1)
-		find_walkable_cells_helper(current + i * directions.rigth, speed - i + 1)
+		find_walkable_cells_helper(current + directions.rigth + (i - 1) * directions.rigth, speed - i + 1)
 
 func find_walkable_cells_helper(var current, var length):
-	walkable_cells.append(current)
 	for i in range(length):
 			walkable_cells.append(current + directions.up * i)
-			walkable_cells.append(current + directions.down * i)
+			if i != 0:
+				walkable_cells.append(current + directions.down * i)
 
 func is_player_selected():
 	if player_selected == true:
