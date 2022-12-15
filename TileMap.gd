@@ -9,12 +9,15 @@ var directions = {"up": Vector2(0, -1), "rigth": Vector2(1, 0), "down": Vector2(
 var map = []
 var full_cells = []
 var walkable_cells = []
+var character_cells = [Vector2(8, 8)]
 var highlight_nodes = []
 
 var player_coordinates = Vector2(5, 5)
 var player_selected = false
 var battle_mode = false
 var player_speed = 5
+
+var selected_character
 
 var cell_highlight = preload("res://cell_highlight.png")
 
@@ -45,20 +48,24 @@ func _unhandled_input(event):
 				print("player selected")
 				return
 			if player_selected == true:
-				var moved = move_character(player_coordinates, target_coordinates, player_speed)
-				if moved:
-					print("player moving")
-					player_coordinates = target_coordinates
-					player_selected = false
-					for y in map:
-						print(y)
-					for node in highlight_nodes:
-						remove_child(node)
-					print("player moved")
-					return
+				if character_cells.has(target_coordinates):
+					print("hug")
 				else:
-					print("player haven't moved")
-					return
+					var moved = move_character(player_coordinates, target_coordinates, player_speed)
+					if moved:
+						print("player moving")
+						player_coordinates = target_coordinates
+						player_selected = false
+						for y in map:
+							print(y)
+						for node in highlight_nodes:
+							remove_child(node)
+						highlight_nodes.clear()
+						print("player moved")
+						return
+					else:
+						print("player haven't moved")
+						return
 			if target_coordinates.x >= map_size.x or target_coordinates.y >= map_size.y:
 				return
 			if is_target_cell_empty(target_coordinates):
@@ -88,7 +95,11 @@ func find_walkable_cells(var character_coordinates, var speed):
 	var current = character_coordinates
 	for i in range(speed, -1, -1):
 		find_walkable_cells_helper(current + i * directions.left, speed - i + 1)
-		find_walkable_cells_helper(current + directions.rigth + (i - 1) * directions.rigth, speed - i + 1)
+		find_walkable_cells_helper(current + directions.rigth + i * directions.rigth, speed - i)
+	for cell in character_cells:
+		if walkable_cells.has(cell):
+			walkable_cells.erase(cell)
+	print(walkable_cells)
 
 
 func find_walkable_cells_helper(var current, var length):
