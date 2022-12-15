@@ -9,12 +9,14 @@ var directions = {"up": Vector2(0, -1), "rigth": Vector2(1, 0), "down": Vector2(
 var map = []
 var full_cells = []
 var walkable_cells = []
+var highlight_nodes = []
 
 var player_coordinates = Vector2(5, 5)
 var player_selected = false
 var battle_mode = false
 var player_speed = 5
 
+var cell_highlight = preload("res://cell_highlight.png")
 
 func _ready():
 	for y in range(map_size.x):
@@ -29,37 +31,41 @@ func _process(delta):
 
 
 func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			#for y in map:
+				#print(y)
+			var touch_position = event.get_position()
+			print(touch_position)
+			var target_coordinates = world_to_map(touch_position)
+			print(target_coordinates)
+			if target_coordinates == player_coordinates:
+				player_selected = true
+				is_player_selected()
+				print("player selected")
+				return
+			if player_selected == true:
+				var moved = move_character(player_coordinates, target_coordinates, player_speed)
+				if moved:
+					print("player moving")
+					player_coordinates = target_coordinates
+					player_selected = false
+					for y in map:
+						print(y)
+					for node in highlight_nodes:
+						remove_child(node)
+					print("player moved")
+					return
+				else:
+					print("player haven't moved")
+					return
+			if target_coordinates.x >= map_size.x or target_coordinates.y >= map_size.y:
+				return
+			if is_target_cell_empty(target_coordinates):
+				print("target appended")
+				append_target(target_coordinates)
 	if not event is InputEventMouseButton:
 		return
-	if event.pressed:
-		for y in map:
-			print(y)
-		var touch_position = event.get_position()
-		print(touch_position)
-		var target_coordinates = world_to_map(touch_position)
-		print(target_coordinates)
-		if target_coordinates == player_coordinates:
-			player_selected = true
-			is_player_selected()
-			print("player selected")
-			return
-		if player_selected == true:
-			var moved = move_character(player_coordinates, target_coordinates, player_speed)
-			if moved:
-				player_coordinates = target_coordinates
-				player_selected = false
-				print("player moved")
-				for y in map:
-					print(y)
-				return
-			else:
-				print("player haven't moved")
-				return
-		if target_coordinates.x >= map_size.x or target_coordinates.y >= map_size.y:
-			return
-		if is_target_cell_empty(target_coordinates):
-			print("target appended")
-			append_target(target_coordinates)
 
 
 func is_target_cell_empty(target_coordinates):
@@ -96,13 +102,26 @@ func find_walkable_cells_helper(var current, var length):
 				walkable_cells.append(down)
 
 
+func show_walkable_cells(var cells):
+	for cell in cells:
+		var highlight_node = Sprite.new()
+		add_child(highlight_node)
+		highlight_node.set_position(map_to_world(cell) + half_cell_size)
+		highlight_node.set_texture(cell_highlight)
+		highlight_nodes.append(highlight_node)
+
+
 func move_character(var character_coordinates, var target_coordinates, var speed):
 	find_walkable_cells(character_coordinates, speed)
 	if walkable_cells.has(target_coordinates):
-		map[target_coordinates.y][target_coordinates.x] = map[character_coordinates.y][character_coordinates.x]
-		map[character_coordinates.y][character_coordinates.x] = 1
+		if not full_cells.has(target_coordinates):
+			map[target_coordinates.y][target_coordinates.x] = map[character_coordinates.y][character_coordinates.x]
+			map[character_coordinates.y][character_coordinates.x] = 1
+			walkable_cells.clear()
+			return true
 		walkable_cells.clear()
-		return true
+		print("cell is full")
+		return false
 	walkable_cells.clear()
 	return false
 
@@ -110,7 +129,8 @@ func move_character(var character_coordinates, var target_coordinates, var speed
 func is_player_selected():
 	if player_selected == true:
 		find_walkable_cells(player_coordinates, player_speed)
-
+		show_walkable_cells(walkable_cells)
+		walkable_cells.clear()
 
 #func lol():
 	#var harita = []
