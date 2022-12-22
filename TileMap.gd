@@ -12,12 +12,12 @@ var walkable_cells = []
 var character_cells = [Vector2(8, 8)]
 var highlight_nodes = []
 
+var character_turn_list = []
+
 var player_coordinates = Vector2(5, 5)
 var player_selected = false
 var battle_mode = false
 var player_speed = 5
-
-var selected_character
 
 var cell_highlight = preload("res://cell_highlight.png")
 
@@ -142,7 +142,14 @@ func is_player_selected():
 		find_walkable_cells(player_coordinates, player_speed)
 		show_walkable_cells(walkable_cells)
 		walkable_cells.clear()
-
+		
+func add_to_turn_list(var character, var action):
+	if not character_turn_list.empty:
+		for x in character_turn_list:
+			if x[1] < action.time:
+				character_turn_list.insert(character_turn_list.find(x) + 1, [character, action.time])
+		
+		
 #func lol():
 	#var harita = []
 	#for x in range(20):
