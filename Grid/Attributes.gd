@@ -1,4 +1,4 @@
-class_name Attributes extends Node
+class_name Attributes extends Sprite
 
 
 var strength = 5
