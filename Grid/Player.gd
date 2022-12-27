@@ -1,4 +1,5 @@
 extends Attributes
+class_name Player
 
 
 var map = get_parent()
