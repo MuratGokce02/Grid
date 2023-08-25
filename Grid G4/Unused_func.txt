@@ -1,0 +1,30 @@
+func find_walkable_cells_2_helper(current, rounds):
+	var surrounding = get_surrounding_cells(current)
+	for i in range(rounds, 1, -1):
+		for cell in surrounding:
+			if not walkable_cells.has(cell):
+				walkable_cells.append(cell)
+				characters[0].set_position(Vector2(200, 200))
+			find_walkable_cells_2_helper(cell, i)
+
+
+func find_walkable_cells(character, agility):
+	var current = character.coordinates
+	for i in range(agility, -1, -1):
+		find_walkable_cells_helper(current + i * directions.left, agility - i + 1)
+		find_walkable_cells_helper(current + directions.rigth + i * directions.rigth, agility - i)
+	for cell in character_cells:
+		if walkable_cells.has(cell):
+			walkable_cells.erase(cell)
+	for cell in walkable_cells:
+		if not map.has(cell):
+			walkable_cells.erase(cell)
+	print(walkable_cells)
+
+func find_walkable_cells_helper(current, length):
+	for i in range(length):
+		var up = current + directions.up * i
+		walkable_cells.append(up)
+		if i != 0:
+			var down = current + directions.down * i
+			walkable_cells.append(down)

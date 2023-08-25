@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbjdgkml43vi2"]
+
+[ext_resource type="Texture2D" uid="uid://bnuy20o1jfyrm" path="res://sources/assets/character_assets/skeleton.png" id="1_smxm0"]
+[ext_resource type="Script" path="res://sources/scripts/character_scripts/Skeleton.gd" id="2_k7aa8"]
+
+[node name="Skeleton" type="VBoxContainer"]
+clip_contents = true
+offset_right = 32.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("2_k7aa8")
+
+[node name="Sprite" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_smxm0")
+stretch_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+show_percentage = false

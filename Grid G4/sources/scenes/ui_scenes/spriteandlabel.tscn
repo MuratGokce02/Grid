@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1kppm6ehpn62"]
+
+[ext_resource type="Texture2D" uid="uid://bon36yo6el3yn" path="res://sources/assets/character_assets/player.png" id="1_wnhr5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7u3i5"]
+font_size = 10
+
+[node name="SpriteAndLabel" type="VBoxContainer"]
+offset_right = 32.0
+offset_bottom = 62.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Texture" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+texture_normal = ExtResource("1_wnhr5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+label_settings = SubResource("LabelSettings_7u3i5")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

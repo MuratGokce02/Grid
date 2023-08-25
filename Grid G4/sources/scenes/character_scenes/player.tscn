@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba582dimxc1hu"]
+
+[ext_resource type="Script" path="res://sources/scripts/character_scripts/Player.gd" id="1_btdv7"]
+[ext_resource type="Texture2D" uid="uid://bon36yo6el3yn" path="res://sources/assets/character_assets/player.png" id="1_i1x8v"]
+
+[node name="Player" type="VBoxContainer"]
+clip_contents = true
+offset_right = 32.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("1_btdv7")
+
+[node name="Sprite" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_i1x8v")
+stretch_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+show_percentage = false
