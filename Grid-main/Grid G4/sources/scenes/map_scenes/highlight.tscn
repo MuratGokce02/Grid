@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwuoodjwsv847"]
+
+[ext_resource type="Texture2D" uid="uid://b28kscij1vpff" path="res://sources/assets/map_assets/cell_highlight.png" id="1_co0t4"]
+
+[node name="Highlight" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.501961)
+texture = ExtResource("1_co0t4")
+
+[node name="Distance" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -37.0
+offset_right = -4.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1

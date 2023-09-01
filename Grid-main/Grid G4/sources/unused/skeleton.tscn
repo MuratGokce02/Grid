@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnuf2x0g3vi8q"]
+
+[ext_resource type="Texture2D" uid="uid://bnuy20o1jfyrm" path="res://sources/assets/character_assets/skeleton.png" id="1_ko4k1"]
+[ext_resource type="Script" path="res://sources/scripts/character_scripts/Skeleton.gd" id="2_e4dei"]
+
+[node name="Skeleton" type="Sprite2D"]
+texture = ExtResource("1_ko4k1")
+script = ExtResource("2_e4dei")
