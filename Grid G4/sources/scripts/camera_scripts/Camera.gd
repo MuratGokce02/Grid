@@ -22,6 +22,8 @@ func _unhandled_input(event):
 				position.x = (position.x - event.relative.x / zoom.x)
 			if get_screen_center_position().y - get_viewport_rect().size.y / 2 / zoom.y - event.relative.y >= 0:
 				position.y = (position.y - event.relative.y / zoom.x)
+			get_node("../TileMap").drag = true
+			#print(get_node("../TileMap").drag)
 		if zoom_event == true:
 			var zoom_value
 			var zoom_x
@@ -48,7 +50,7 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			if zoom.x - 0.03 > 0.5:
 				zoom -= Vector2(0.03, 0.03)
-	get_parent().find_child("TileMap").drag = false
+	#get_parent().find_child("TileMap").drag = false
 	return
 
 

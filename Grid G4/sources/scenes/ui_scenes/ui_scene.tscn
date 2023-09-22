@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu10ux38g1c57"]
+[gd_scene load_steps=5 format=3 uid="uid://cu10ux38g1c57"]
 
 [ext_resource type="Script" path="res://sources/scripts/ui_scripts/SkillBar.gd" id="1_uskvp"]
 [ext_resource type="Texture2D" uid="uid://gh3rf04gf1l7" path="res://sources/assets/ui_assets/pixilart-drawing.png" id="2_0fvp5"]
 [ext_resource type="Script" path="res://sources/scripts/ui_scripts/CharacterTurnBar.gd" id="2_arati"]
+[ext_resource type="Script" path="res://sources/scripts/ui_scripts/ContinueButton.gd" id="3_e0i42"]
 
 [node name="UICanvas" type="CanvasLayer"]
 
@@ -27,6 +28,11 @@ script = ExtResource("1_uskvp")
 layout_mode = 2
 icon = ExtResource("2_0fvp5")
 icon_alignment = 1
+
+[node name="Continue" type="Button" parent="SkillBar"]
+layout_mode = 2
+text = "STOPPED"
+script = ExtResource("3_e0i42")
 
 [node name="CharacterTurnBar" type="VBoxContainer" parent="."]
 anchors_preset = 2

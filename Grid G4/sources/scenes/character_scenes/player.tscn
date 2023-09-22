@@ -1,12 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba582dimxc1hu"]
+[gd_scene load_steps=6 format=3 uid="uid://ba582dimxc1hu"]
 
 [ext_resource type="Script" path="res://sources/scripts/character_scripts/Player.gd" id="1_btdv7"]
 [ext_resource type="Texture2D" uid="uid://bon36yo6el3yn" path="res://sources/assets/character_assets/player.png" id="1_i1x8v"]
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtwhu"]
+
+[sub_resource type="Animation" id="Animation_ioy57"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HSeparator:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 9), Vector2(0, 4), Vector2(0, 9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0ex6"]
+_data = {
+"Turn": SubResource("Animation_ioy57")
+}
+
 [node name="Player" type="VBoxContainer"]
+texture_filter = 2
 clip_contents = true
-offset_right = 32.0
-offset_bottom = 40.0
+offset_right = 33.0
+offset_bottom = 53.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
@@ -20,3 +43,15 @@ stretch_mode = 2
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 2
 show_percentage = false
+
+[node name="HSeparator" type="HSeparator" parent="."]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 4.01694)
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "turn"
+libraries = {
+"": SubResource("AnimationLibrary_vtwhu"),
+"Character Animations": SubResource("AnimationLibrary_a0ex6")
+}

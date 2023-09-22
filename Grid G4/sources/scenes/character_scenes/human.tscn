@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://jusq5c7ua14u"]
+
+[ext_resource type="Texture2D" uid="uid://dhix5ai67iby7" path="res://sr202c3a53218aws3.png" id="1_7765e"]
+[ext_resource type="Texture2D" uid="uid://caq5rwh8j21e8" path="res://torso-pixilart (1).png" id="2_5uvym"]
+[ext_resource type="Texture2D" uid="uid://beueejtdxu6dh" path="res://upper-arm-pixilart.png" id="2_pc50c"]
+[ext_resource type="Texture2D" uid="uid://dbtrob5ij0xbp" path="res://hips-pixilart.png" id="3_ppycn"]
+[ext_resource type="Texture2D" uid="uid://coildvkmkeyew" path="res://thigh-pixilart.png" id="4_h36ir"]
+[ext_resource type="Texture2D" uid="uid://myjrw5kw1chh" path="res://lower-arm-pixilart.png" id="4_km0lw"]
+[ext_resource type="Texture2D" uid="uid://bt4day5sqj5pm" path="res://pixil-frame-0.png" id="5_e6705"]
+[ext_resource type="Texture2D" uid="uid://c8a137ega2h25" path="res://lower-leg-pixilart.png" id="8_h85em"]
+
+[node name="Human" type="Node2D"]
+texture_filter = 2
+
+[node name="Head" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-5, -25)
+texture = ExtResource("1_7765e")
+centered = false
+
+[node name="Torso" type="Sprite2D" parent="."]
+visibility_layer = 2
+texture_filter = 1
+position = Vector2(-11, -12)
+texture = ExtResource("2_5uvym")
+centered = false
+
+[node name="Upper Arm Right" type="Sprite2D" parent="Torso"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(-7, 2)
+texture = ExtResource("2_pc50c")
+centered = false
+
+[node name="Lower Arm Right" type="Sprite2D" parent="Torso/Upper Arm Right"]
+top_level = true
+texture_filter = 1
+position = Vector2(-17, 1)
+texture = ExtResource("4_km0lw")
+centered = false
+
+[node name="Hand Right" type="Sprite2D" parent="Torso/Upper Arm Right/Lower Arm Right"]
+texture_filter = 1
+position = Vector2(7, 10)
+texture = ExtResource("5_e6705")
+centered = false
+
+[node name="Upper Arm Left" type="Sprite2D" parent="Torso"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(20, 2)
+texture = ExtResource("2_pc50c")
+centered = false
+flip_h = true
+
+[node name="Lower Arm Left" type="Sprite2D" parent="Torso/Upper Arm Left"]
+top_level = true
+texture_filter = 1
+position = Vector2(7, 1)
+texture = ExtResource("4_km0lw")
+centered = false
+flip_h = true
+
+[node name="Hand Left" type="Sprite2D" parent="Torso/Upper Arm Left/Lower Arm Left"]
+texture_filter = 1
+position = Vector2(-2, 10)
+texture = ExtResource("5_e6705")
+centered = false
+flip_h = true
+
+[node name="Hips" type="Sprite2D" parent="Torso"]
+texture_filter = 1
+position = Vector2(2, 23)
+texture = ExtResource("3_ppycn")
+centered = false
+
+[node name="Thigh Right" type="Sprite2D" parent="Torso/Hips"]
+texture_filter = 1
+position = Vector2(-3, 5)
+texture = ExtResource("4_h36ir")
+centered = false
+
+[node name="Thigh Left" type="Sprite2D" parent="Torso/Hips"]
+texture_filter = 1
+position = Vector2(10, 5)
+texture = ExtResource("4_h36ir")
+centered = false
+flip_h = true
+
+[node name="Lower-leg-pixilart" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-10, 39)
+texture = ExtResource("8_h85em")
+
+[node name="Lower-leg-pixilart2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(10, 39)
+texture = ExtResource("8_h85em")
+flip_h = true
